@@ -1,0 +1,184 @@
+/*@font-face {*/
+/*    font-family: 'poppinsmedium';*/
+/*    src: url('../fonts/poppins-medium-webfont.woff2') format('woff2'),*/
+/*         url('../fonts/poppins-medium-webfont.woff') format('woff');*/
+/*    font-weight: normal;*/
+/*    font-style: normal;*/
+
+/*}*/
+
+/*@font-face {*/
+/*    font-family: 'poppinsregular';*/
+/*    src: url('../fonts/poppins-regular-webfont.woff2') format('woff2'),*/
+/*         url('../fonts/poppins-regular-webfont.woff') format('woff');*/
+/*    font-weight: normal;*/
+/*    font-style: normal;*/
+
+/*}*/
+
+/*!*----*!*/
+/*.listing {*/
+/*    padding: 20px 0;*/
+/*}*/
+/*.map {*/
+/*    text-align: center;*/
+/*}*/
+/*.map img {*/
+/*    max-width:100%;*/
+/*}*/
+/*.buttons {*/
+/*    display: block;*/
+/*}*/
+/*.buttons .btn{*/
+/*    width: 100%;*/
+/*	margin:0 0 15px 0;*/
+/*}*/
+/*.card {*/
+/*    margin: 0 0 30px 0;*/
+/*}*/
+/*.map .card {*/
+/*    min-height: 350px;*/
+/*    max-height: 350px;*/
+/*}*/
+/*.checkboxes .checkbox-label {*/
+/*  display: block;*/
+/*  position: relative;*/
+/*  padding-left: 35px;*/
+/*  margin-bottom: 12px;*/
+/*  cursor: pointer;*/
+/*  font-size:14px;*/
+/*  -webkit-user-select: none;*/
+/*  -moz-user-select: none;*/
+/*  -ms-user-select: none;*/
+/*  user-select: none;*/
+/*  text-align: left;*/
+/*  line-height: 25px;*/
+/*	*/
+/*}*/
+/*.checkboxes .checkbox-label input {*/
+/*  position: absolute;*/
+/*  opacity: 0;*/
+/*  cursor: pointer;*/
+/*  height: 0;*/
+/*  width: 0;*/
+/*}*/
+/*.checkboxes .checkmark {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  height: 25px;*/
+/*  width: 25px;*/
+/*  background-color: #eee;*/
+/*}*/
+/*.checkboxes .checkbox-label:hover input ~ .checkmark {*/
+/*  background-color: #ccc;*/
+/*}*/
+/*.checkboxes .checkbox-label input:checked ~ .checkmark {*/
+/*  background-color: #969cab;*/
+/*}*/
+/*.checkboxes .checkmark:after {*/
+/*  content: "";*/
+/*  position: absolute;*/
+/*  display: none;*/
+/*}*/
+/*.checkboxes .checkbox-label input:checked ~ .checkmark:after {*/
+/*  display: block;*/
+/*}*/
+
+/*.checkboxes .checkbox-label .checkmark:after {*/
+/*  left: 9px;*/
+/*  top: 5px;*/
+/*  width: 7px;*/
+/*  height: 14px;*/
+/*  border: solid white;*/
+/*  border-width: 0 3px 3px 0;*/
+/*  -webkit-transform: rotate(45deg);*/
+/*  -ms-transform: rotate(45deg);*/
+/*  transform: rotate(45deg);*/
+/*}*/
+/*.table.commonWidth{*/
+/*min-width:900px;*/
+/*}*/
+/*.table thead tr th{*/
+/*    background-color: #000;*/
+/*    color: #fff;*/
+/*    border:0px;*/
+/*    border-right: 0px;*/
+/*    font-size: 13px;*/
+/*}*/
+/*.table tbody tr td{*/
+/*font-size: 13px;*/
+/*	vertical-align:middle;*/
+/*}*/
+/*.table tbody tr td select{*/
+/*padding:0px;*/
+/*border:0px;*/
+/*font-size: 13px;*/
+/*}*/
+/*.tableBodyScroll tbody {*/
+/*    display: block;*/
+/*    max-height: 200px;*/
+/*    overflow-y: auto;*/
+/*}*/
+
+/*.tableBodyScroll thead, tbody tr {*/
+/*    display: table;*/
+/*    width: 100%;*/
+/*    table-layout: fixed;*/
+/*}*/
+
+/*!*--summary section --*!*/
+/*.sunBor{*/
+/*  border-right:1px solid #ddd;	*/
+/*}*/
+/*.inputsBtns {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*	margin:0 0 15px 0;*/
+/*}*/
+/*.valueBtn {*/
+/*flex: 1 0 20%;*/
+/*    margin: 5px;*/
+/*}*/
+/*.valueBtn label {*/
+/*    margin: 0 0 5px 0;*/
+/*    font-size: 14px;*/
+/*}*/
+/*.summaryInfo {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*	    align-items: center;*/
+/*}*/
+/*.summaryBoxes{*/
+/*    display: flex;*/
+/*    grid-template-columns: repeat(auto-fill,minmax(160px,1fr));*/
+/*    flex-wrap: wrap;*/
+/*	*/
+/*}*/
+/*.summaryBoxes.checkboxes .checkbox-label{*/
+/*    margin-bottom: 8px;*/
+/*    margin-right: 10px;*/
+/*}*/
+/*.time {*/
+/*    padding: 9px;*/
+/*    background-color: #eee;*/
+/*    border: 1px solid #ddd;*/
+/*}*/
+/*.time label {*/
+/*    margin: 0;*/
+/*}*/
+/*.summarybuttons {*/
+/*   margin-top: 10px;*/
+/*}*/
+/*.summarybuttons .btn {*/
+/*    min-width: 167px;*/
+/*}*/
+
+/*!*--responsive --*!*/
+/*@media (max-width: 767px)*/
+/*{*/
+/* .sunBor{*/
+/*  border-bottom:1px solid #ddd;	*/
+/*	 border-right:0px;*/
+/*}	*/
+/*}*/

@@ -1,0 +1,300 @@
+<!----------------------------------CREATING DROPDOWNS---------------------------------------->
+<div onLoad="GetMap()">
+  <section class="listing">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-12">
+          <mat-form-field>
+            <mat-label>Customers List</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let customer of customerireferencedto" (click)="onCustomerClicked($event)"
+                value="{{ customer.desc }}">
+                {{ customer.desc }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6 col-md-4 col-sm-12">
+          <mat-form-field>
+            <mat-label>Circuit List</mat-label>
+            <mat-select [disabled]="isCircuitList" (click)="onCircuitClicked($event)">
+              <mat-option *ngFor="let circuitList of circuitservicerefdto" value="{{ circuitList.desc }}">
+                {{ circuitList.desc }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-12">
+          <mat-form-field>
+            <mat-label>Trip List</mat-label>
+            <mat-select [disabled]="isTripList">
+              <mat-option *ngFor="let tripService of tripdto" value="{{ tripService.externalRef }}">
+                {{ tripService.externalRef }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="map">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="card-header">Itinerary points</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <div>
+                  <table style="width: 100%;">
+                    <thead>
+                      <th> Seq. </th>
+                      <th> Latitude </th>
+                      <th> Longitude </th>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let r of ringsArray; let index=index">
+                        <tr>
+                          <td> {{index+1}} </td>
+                          <td> {{r[0]}} </td>
+                          <td> {{r[1]}} </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="card" style="min-height: 400px;">
+            <div class="card-header">Map</div>
+            <div class="card-body">
+              <div class="map">
+                <div id="myMap" style="min-height: 340px;"></div>
+                <!-- <div style="position:absolute;top:10px;left:10px;">
+                  <input type="button" value="Draw Polygon" onclick="drawingTools.startDrawing();" />
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="buttons">
+                <button class="btn btn-md btn-primary" (click)="addRoute()">Refine route</button>
+                <!-- <button class="btn btn-md btn-primary" onclick="drawingTools.clear();">Reset legs</button> -->
+                <button class="btn btn-md btn-primary" (click)="resetLegs()">Reset legs</button>
+              </div>
+              <div class="checkboxes">
+                <mat-checkbox [(ngModel)]="myLocation" (change)="checkBoxEventChange()">Show my locations</mat-checkbox>
+                <mat-checkbox>Show all client locations</mat-checkbox>
+                <mat-checkbox>Show stops</mat-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="listing">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">Route sheet (left-right)</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table mat-table [dataSource]="routefix" class="mat-elevation-z8">
+                  <ng-container matColumnDef="Seq">
+                    <th mat-header-cell *matHeaderCellDef> Seq </th>
+                    <td mat-cell *matCellDef="let element" data-label="Seq">
+                      <mat-select placeholder="Seq">
+                        <mat-option *ngFor="let seq of routefix" value="{{ seq.seq }}">
+                          {{ seq.seq }}
+                        </mat-option>
+                      </mat-select>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Time">
+                    <th mat-header-cell *matHeaderCellDef> Time </th>
+                    <td mat-cell *matCellDef="let element" data-label="Time">
+                      <mat-select placeholder="Time">
+                        <mat-option *ngFor="let time of routefix" value="{{ time.wpTime }}">
+                          {{ time.time }}
+                        </mat-option>
+                      </mat-select>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Directive">
+                    <th mat-header-cell *matHeaderCellDef> Directive </th>
+                    <td mat-cell *matCellDef="let element" data-label="Directive">
+                      <mat-select placeholder="Directive">
+                        <mat-option *ngFor="let directive of routefix['directive']" value="{{ directive.directive }}">
+                          {{ directive.directive }}
+                        </mat-option>
+                      </mat-select>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Waypoint">
+                    <th mat-header-cell *matHeaderCellDef> Waypoint </th>
+                    <td mat-cell *matCellDef="let element" data-label="Waypoint">
+                      <mat-select placeholder="Waypoint">
+                        <mat-option *ngFor="let Waypoint of routefix" value="{{ Waypoint.waypoint }}">
+                          {{ Waypoint.waypoint }}
+                        </mat-option>
+                      </mat-select>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Remarks">
+                    <th mat-header-cell *matHeaderCellDef> Remarks </th>
+                    <td mat-cell *matCellDef="let element" data-label="Remarks">{{ element.remarks }} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Emb">
+                    <th mat-header-cell *matHeaderCellDef> Emb </th>
+                    <td mat-cell *matCellDef="let element" data-label="Emb">
+                      <mat-select placeholder="Emb">
+                        <mat-option *ngFor="let Emb of routefix" value="{{ Emb.emb }}">
+                          {{ Emb.emb }}
+                        </mat-option>
+                      </mat-select>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Deb.">
+                    <th mat-header-cell *matHeaderCellDef> Deb. </th>
+                    <td mat-cell *matCellDef="let element" data-label="Deb.">
+                      <mat-select placeholder="Deb">
+                        <mat-option *ngFor="let Deb of routefix" value="{{ Deb.deb }}">
+                          {{ Deb.deb }}
+                        </mat-option>
+                      </mat-select>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Cumul distance">
+                    <th mat-header-cell *matHeaderCellDef> Cumul distance </th>
+                    <td mat-cell *matCellDef="let element" data-label="Cumul distance">{{ element.cumuldistance }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="Total onboard">
+                    <th mat-header-cell *matHeaderCellDef> Total onboard </th>
+                    <td mat-cell *matCellDef="let element" data-label="Total onboard">{{ element.totalonboard }}</td>
+                  </ng-container>Emb
+
+                  <tr mat-header-row *matHeaderRowDef="routefixHeader"></tr>
+                  <tr mat-row *matRowDef="let row; columns: routefixHeader;"></tr>
+                </table>
+
+                <ng-template #elseBlock>No Records.</ng-template>
+              </div>
+              <div class="btns text-right" *ngIf="itineraryArrayLength>1; else elseButton"
+                [visible]="isRouteSheetTable">
+                <button class="btn btn-md btn-primary">Reset route sheet</button>
+                <button class="btn btn-md btn-primary">Import itinerary data</button>
+              </div>
+              <ng-template #elseButton>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="summary">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">Summary</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 col-sm-12 sunBor">
+                  <div class="inputsBtns">
+                    <div class="valueBtn">
+                      <mat-form-field>
+                        <mat-label>Begin time</mat-label>
+                        <input type="text" placeholder="Enter value" matInput>
+                      </mat-form-field>
+
+                    </div>
+                    <div class="valueBtn">
+                      <mat-form-field>
+                        <mat-label>End time</mat-label>
+                        <input type="text" placeholder="Enter value" matInput>
+                      </mat-form-field>
+                    </div>
+                    <div class="valueBtn">
+                      <mat-form-field>
+                        <mat-label>Distance</mat-label>
+                        <input type="text" placeholder="Enter value" matInput>
+                      </mat-form-field>
+                    </div>
+                    <div class="valueBtn">
+                      <mat-form-field>
+                        <mat-label>Occupation</mat-label>
+                        <input type="text" placeholder="Enter value" matInput>
+                      </mat-form-field>
+                    </div>
+                    <div class="valueBtn">
+                      <mat-form-field>
+                        <mat-label>Start Location</mat-label>
+                        <input type="text" placeholder="Enter value" matInput>
+                      </mat-form-field>
+                    </div>
+                    <div class="valueBtn">
+                      <mat-form-field>
+                        <mat-label>End Location</mat-label>
+                        <input type="text" placeholder="Enter value" matInput>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <div class="inputsBtns">
+                    <div class="valueBtn">
+                      <mat-form-field>
+                        <mat-label>Active From</mat-label>
+                        <input type="text" placeholder="Enter value" matInput>
+                      </mat-form-field>
+
+                    </div>
+                    <div class="valueBtn">
+                      <mat-form-field>
+                        <mat-label>Active To</mat-label>
+                        <input type="text" placeholder="Enter value" matInput>
+                      </mat-form-field>
+
+                    </div>
+                  </div>
+                  <div class="summaryInfo">
+                    <div class="summaryBoxes checkboxes">
+                      <mat-checkbox>Mon</mat-checkbox>
+                      <mat-checkbox>Tue</mat-checkbox>
+                      <mat-checkbox>Wed</mat-checkbox>
+                      <mat-checkbox>Thu</mat-checkbox>
+                      <mat-checkbox>Fri</mat-checkbox>
+                      <mat-checkbox>Sat</mat-checkbox>
+                      <mat-checkbox>Sun</mat-checkbox>
+                    </div>
+                    <div class="time">
+                      <label>Am</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="summarybuttons text-center">
+                    <button class="btn btn-md btn-primary" (click)="clearArray()">Reset</button>
+                    <button class="btn btn-md btn-primary">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
